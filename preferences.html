@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>tripMuc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Plan your trip through Munich">
+
+    <style>
+    body {
+      margin: 0;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background-color: #1b98d5;
+    }
+    .width-100 {
+      width: 100vw;
+    }
+    .height-100 {
+      height: 100vh;
+    }
+    .height-66 {
+      height: 66vh;
+    }
+    .vertical-center {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .horizontal-center {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+    h1 {
+      font-size: 52px;
+      padding: 0;
+      margin: 30px 0;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.8);
+      font-weight: lighter;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    input, select {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      font-size: 24px;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      max-width: 196px;
+    }
+    #start {
+      width: 48px;
+      height: 48px;
+      background-color: #ffe501;
+      border-radius: 50%;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      font-weight: bold;
+      margin-left: 10px;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    .input-wrap {
+      background-color: white;
+      margin: 0 10px;
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      font-family: sans-serif;
+      border: 4px solid white;
+      border-radius: 10px;
+    }
+    label, p, span {
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+    }
+    #preference-form p {
+      margin-top: 10px;
+    }
+    #preference-form span {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    #preference-form > div {
+      width: 300px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    #preference-form label {
+        height: 30px;
+    }
+    #preference-form {
+      font-size: 20px;
+    }
+    input[type="range"] {
+      width: 110px;
+      border: 1px solid rgba(255,255,255,0.4);
+      -webkit-appearance: none;
+      appearance: none;
+      background: none;
+      outline: none;
+      margin-top: 15px;
+      height: 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 229, 1, 0.8);
+      cursor: pointer;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    </style>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <div class="height-100 width-100 vertical-center">
+      <h2>2. Select your preferences</h2>
+      <div class="horizontal-center">
+      <div id="preference-form" class="vertical-center">
+        <div>
+          <span style="width: 180px;"></span>
+          <span>less</span>
+          <span>medium</span>
+          <span>more</span>
+        </div>
+        <div>
+          <label for="trip-length">Daily activities</label>
+          <input name="trip-length" type="range" min="-1" max="1" step="1">
+        </div>
+        <p>Interests in &#8230;</p>
+        <div>
+          <label for="sightseeing-interest">Landmarks</label>
+          <input name="sightseeing-interest" type="range" min="-1" max="1" step="1">
+        </div>
+        <div>
+          <label for="culture-interest">Culture</label>
+          <input name="culture-interest" type="range" min="-1" max="1" step="1">
+        </div>
+        <div>
+          <label for="shopping-interest">Shopping</label>
+          <input name="shopping-interest" type="range" min="-1" max="1" step="1">
+        </div>
+        <div>
+          <label for="food-interest">Food</label>
+          <input name="food-interest" type="range" min="-1" max="1" step="1">
+        </div>
+        <div>
+          <label for="events-interest">Events</label>
+          <input name="events-interest" type="range" min="-1" max="1" step="1">
+        </div>
+        <div style="justify-content: center;">
+          <input id="start" style="margin-top: 20px;" type="button" value="&#10132;">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

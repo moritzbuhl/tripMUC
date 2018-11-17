@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Plan your trip to Munich with tripMUC",
   "main": "index.js",
-  "dependencies": {
-    "flatpickr": "^4.5.2"
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^0.11.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/http-server/bin/http-server ."
   },
   "repository": {
     "type": "git",
