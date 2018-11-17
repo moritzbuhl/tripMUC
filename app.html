@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>tripMuc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Plan your trip in Munich">
+
+  	<link rel="stylesheet" type="text/css" href="node_modules/map-icons/dist/css/map-icons.css">
+    <style>
+    body {
+      margin: 0;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background-color: #1b98d5;
+    }
+    .width-100 {
+      width: 100vw;
+    }
+    .height-100 {
+      height: 100vh;
+    }
+    .height-66 {
+      height: 66vh;
+    }
+    .vertical-center {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .horizontal-center {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+    h1 {
+      font-size: 52px;
+      padding: 0;
+      margin: 30px 0;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      font-weight: lighter;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    input, select {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      font-size: 24px;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      max-width: 196px;
+    }
+    #start {
+      width: 48px;
+      height: 48px;
+      background-color: #ffe501;
+      border-radius: 50%;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      font-weight: bold;
+      margin-left: 10px;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    .input-wrap {
+      background-color: white;
+      margin: 0 10px;
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      font-family: sans-serif;
+      border: 4px solid white;
+      border-radius: 10px;
+    }
+    label, p, span {
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+    }
+    #preference-form p {
+      margin-top: 10px;
+    }
+    #preference-form span {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    #preference-form > div {
+      width: 300px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    #preference-form label {
+        height: 30px;
+    }
+    #preference-form {
+      font-size: 20px;
+    }
+    input[type="range"] {
+      width: 110px;
+      border: 1px solid rgba(255,255,255,0.4);
+      -webkit-appearance: none;
+      appearance: none;
+      background: none;
+      outline: none;
+      margin-top: 15px;
+      height: 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 229, 1, 0.8);
+      cursor: pointer;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #time-table-container {
+      width: 24vw;
+      padding: 3vh 3vw;
+      justify-content: start;
+    }
+    #time-table {
+      width: 100%;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #trip-map-container {
+        width: 44vw;
+        height: 60vh;
+        padding: 3vh 3vw;
+    }
+    #map {
+      height: 60vh;
+      width: 60vh;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #suggested-location-container {
+        width: 44vw;
+        height: 28vh;
+        padding: 3vh 3vw;
+    }
+    #suggestions {
+      height: 28vh;
+      width: 44vw;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #time-table-header {
+      background-color: rgba(255,255,255,0.5);
+    }
+    .single-day {
+      width: 25%;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,0);
+      text-align: center;
+    }
+    .selected-day {
+      background-color: white;
+    }
+    h3 {
+      font-size: 20px;
+      margin: 0;
+      color: rgba(0,0,0,0.7);
+    }
+    .selected-day > h3 {
+    color: rgba(0,0,0,1);
+    }
+    h4 {
+      margin: 0;
+    }
+    h4 > a {
+      font-size: 12px;
+      color: #1b98d5;
+      text-decoration: none;
+    }
+    h4 > a > img {
+      height: 14px;
+      margin-bottom: -2px;
+    }
+    time {
+      color: rgba(0,0,0,0.5);
+      font-style: italic;
+      font-size: 12px;
+      margin: 0;
+    }
+    .location-item {
+      background-color: white;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      justify-content: space-between;
+    }
+    .item-info {
+      padding: 8px;
+    }
+    small {
+      font-size: 12px;
+      color: rgba(0,0,0,0.8);
+    }
+    .travel-time {
+      background-color: white;
+      padding-left: 89px;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+    .travel-time > p,
+    .map-icon-bus-station {
+      color: rgba(0,0,0,0.7);
+      font-size: 14px;
+      margin-right: 24px;
+    }
+    .draggable {
+      padding: 0 20px;
+      border-right: 1px solid rgba(0,0,0,0.2);
+    }
+    .remove {
+      height: 16px;
+      margin: 4px;
+    }
+    .category-icon {
+      height: 48px;
+      width: 48px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   <script>
+   var mymap;
+   window.onload = () => {
+     mymap = L.map('map').setView([48.135000, 11.575000], 13);
+   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoibWJ1aGwiLCJhIjoiY2pvbHc0cWtiMGQ1MDNrcWIycXljbDlnaiJ9.CMZXaqKpsWdVQKZ91aGXHg'
+}).addTo(mymap);
+}
+   </script>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <div class="horizontal-center">
+      <div id="time-table-container" class="vertical-center">
+        <div id="time-table">
+          <div id="time-table-header" class="horizontal-center">
+            <div id="day1" class="single-day">
+              <h3>Day 1</h3>
+              <time>18.11.2018</time>
+            </div>
+            <div id="day2" class="single-day">
+              <h3>Day 2</h3>
+              <time>19.11.2018</time>
+            </div>
+            <div id="day3" class="single-day selected-day">
+              <h3>Day 3</h3>
+              <time>20.11.2018</time>
+            </div>
+            <div id="day4" class="single-day">
+              <h3>Day 4</h3>
+              <time>21.11.2018</time>
+            </div>
+          </div>
+          <div id="location-list">
+            <div class="vertical-center">
+              <div class="location-item horizontal-center">
+                <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                <div class="item-info">
+                  <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                  <small>Location-Str. 4, 80000 Munich</small>
+                </div>
+                <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+              </div>
+              <div class="travel-time">
+                <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+              </div>
+            </div>
+              <div class="vertical-center">
+                <div class="location-item horizontal-center">
+                  <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                  <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                  <div class="item-info">
+                    <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                    <small>Location-Str. 4, 80000 Munich</small>
+                  </div>
+                  <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                </div>
+                <div class="travel-time">
+                  <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                </div>
+              </div>
+                <div class="vertical-center">
+                  <div class="location-item horizontal-center">
+                    <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                    <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                    <div class="item-info">
+                      <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                      <small>Location-Str. 4, 80000 Munich</small>
+                    </div>
+                    <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                  </div>
+                  <div class="travel-time">
+                    <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                  </div>
+                </div>
+                  <div class="vertical-center">
+                    <div class="location-item horizontal-center">
+                      <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                      <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                      <div class="item-info">
+                        <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                        <small>Location-Str. 4, 80000 Munich</small>
+                      </div>
+                      <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                    </div>
+                    <div class="travel-time">
+                      <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                    </div>
+                  </div>
+                    <div class="vertical-center">
+                      <div class="location-item horizontal-center">
+                        <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                        <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                        <div class="item-info">
+                          <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                          <small>Location-Str. 4, 80000 Munich</small>
+                        </div>
+                        <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                      </div>
+                      <div class="travel-time">
+                        <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                      </div>
+                    </div>
+                      <div class="vertical-center">
+                        <div class="location-item horizontal-center">
+                          <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                          <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                          <div class="item-info">
+                            <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                            <small>Location-Str. 4, 80000 Munich</small>
+                          </div>
+                          <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                        </div>
+                        <div class="travel-time">
+                          <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                        </div>
+                      </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div id="trip-map-container">
+          <div id="map">
+          </div>
+        </div>
+        <div id="suggested-location-container">
+          <div id="suggestions">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
