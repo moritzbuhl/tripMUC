@@ -13,37 +13,40 @@ basicHeaders = {
 
 names = []
 addresses = []
-ratings = [] 
-links = []
-zipcodes = []
-response = get('https://www.muenchen.de/sehenswuerdigkeiten/museen.html', headers = basicHeaders)
+dates = []
+links =[]
+count = 0
+startdate = "29.11.2018" #Need Date query
+enddate = "22.12.2018"   #Need Date query
+response = get('https://www.muenchen.de/veranstaltungen/event/listing.html?what=&where=&from=' + startdate + '&to=' + enddate, headers = basicHeaders)
 html_soup = BeautifulSoup(response.text, 'lxml')
 if html_soup is not None:
-        eat_containers = html_soup.find_all('div', class_= ['item item--premium','item item--grund'])
+        eat_containers = html_soup.find_all('div', class_= ['item'])
 
         for container in eat_containers:
-            if float(container.find('div', attrs = {'class':'rating'})['data-numratings']) > 3:
+            if count <= 5:
+                count = count + 1
 
-                name = container.h3.text.split('\n')[1].strip()
+                name = container.h2.text
                 names.append(name)
+                print(name)
 
-                address = container.div.find('span', class_ = 'item__url item__url--address str').text
+                date = container.div.span.text.split('\n')[1].strip()#find('span', attrs = {'data-reactid': '.0.0.$6259.0.1.1.0'})
+                dates.append(date)
+                print(date)
+
+                address = container.div.find('a', class_ = 'eventinfo eventinfo--location').text
                 addresses.append(address)
+                print(address)
 
-                zipcode = container.div.find('span', class_ = 'item__url item__url--address zip').text[0:5]
-                zipcodes.append(zipcode)
-                print(zipcode)
-
-                rating = container.find('div', attrs = {'class':'rating'})['data-avgrating']
-                ratings.append(rating)
-
-                link = container.div.find('a', attrs = {'class': 'item__url'})['href']
+                link = container.div.find('a', attrs = {'class': 'eventinfo eventinfo--headline'})['href']
                 links.append(link)
+                print(link)
 
 
 
 
-test_df = pd.DataFrame({'Museum': names, 'address': addresses, 'votes': ratings, 'link':links, 'Zipcode':zipcodes})
-test_df.to_csv('mucmuseen.csv')
-test_df.to_json('mucmuseen.json')
+test_df = pd.DataFrame({'Events': names,'link':links, 'Location':addresses, 'Time':dates})
+test_df.to_csv('mucevents.csv')
+test_df.to_json('mucevents.json')
 print(test_df.info())
