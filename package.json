@@ -1,0 +1,33 @@
+{
+  "name": "tripmuc",
+  "version": "1.0.0",
+  "description": "Plan your trip to Munich with tripMUC",
+  "main": "index.js",
+  "dependencies": {
+    "flatpickr": "^4.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moritzbuhl/tripMUC.git"
+  },
+  "keywords": [
+    "munich",
+    "city",
+    "trip",
+    "planning"
+  ],
+  "author": "tripMUC Team",
+  "contributors": [
+    "Moritz Buhl <tripmuc@mbuhl.me> (https://moritzbuhl.de/)",
+    "Kangkang Wang <wangkangx2@gmail.com (https://github.com/userkkw)"
+  ],
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/moritzbuhl/tripMUC/issues"
+  },
+  "homepage": "https://github.com/moritzbuhl/tripMUC#readme"
+}
