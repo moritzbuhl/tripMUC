@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+,restaurant,address,votes,link,Zipcode
+=======
 id,restaurant,address,votes,link,Zipcode
+>>>>>>> f34965ff10984204a49484d32e08be4ddb561cee
 0,Am Steinsee Restaurant Cafe,Niederseeon 17,5,https://branchenbuch.portal.muenchen.de/mhp/1249086/,85665
 1,Asam-Schlössl,Maria-Einsiedel-Str. 45,4,http://www.muenchen.de/essen-trinken/orte/121369.html,81379
 2,Aschbacher Hof Restaurant,Aschbach 3,5,https://branchenbuch.portal.muenchen.de/mhp/1215325/,83620

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+,restaurant,address,votes,link,Zipcode
+=======
 id,restaurant,address,votes,link,Zipcode
+>>>>>>> f34965ff10984204a49484d32e08be4ddb561cee
 0,Effnerplatz,Effnerplatz 1,2,https://www.muenchen.de/sehenswuerdigkeiten/orte/120334.html,81679
 1,Gärtnerplatz,Gärtnerplatz 1,5,https://www.muenchen.de/sehenswuerdigkeiten/orte/120320.html,80469
 2,Geschwister-Scholl-Platz,Geschwister-Scholl-Platz 1,5,https://www.muenchen.de/sehenswuerdigkeiten/orte/120313.html,80539
@@ -54,7 +58,11 @@ id,restaurant,address,votes,link,Zipcode
 52,Dechsendorfer Platz,Dechsendorfer Platz 1,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/1214006.html,91056
 53,Domplatz,Domplatz,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/144892.html,85072
 54,Domplatz,Domplatz,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/255419.html,94032
+<<<<<<< HEAD
+55,Domplatz,Domplatz 1,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/1223522.html,5020 
+=======
 55,Domplatz,Domplatz 1,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/1223522.html,5020
+>>>>>>> f34965ff10984204a49484d32e08be4ddb561cee
 56,Dr.-Martin-Luther-Platz,Dr.-Martin-Luther-Platz,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/147281.html,91438
 57,Egidienplatz,Egidienplatz,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/1214005.html,91058
 58,Elisabethplatz,Elisabethplatz 1,0,https://www.muenchen.de/sehenswuerdigkeiten/orte/120325.html,80796
