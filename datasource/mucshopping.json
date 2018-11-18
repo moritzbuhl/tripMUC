@@ -1,1 +1,186 @@
-{"restaurant":{"0":"Designer Second Hand Solln","1":"Gabin Designer Secondhand","2":"Cri Cri Secondhand Kindermode","3":"Fashion & Fantasy","4":"KLEIDERPRACHT 1st & 2nd hand","5":"CityQuartier F\u00fcnf H\u00f6fe","6":"Kaufingertor","7":"MIRA mein Einkaufszentrum","8":"Olympia-Einkaufszentrum","9":"pep M\u00fcnchen-Neuperlach","10":"Riem Arcaden","11":"CityQuartier F\u00fcnf H\u00f6fe","12":"Hofstatt Einkaufspassage","13":"Kaufingertor","14":"Luitpoldblock","15":"Stachus Passagen","16":"Eataly am Viktualienmarkt","17":"Flughafen M\u00fcnchen","18":"BASSETTI OUTLET Martinsried","19":"Classic Outlet","20":"Tretter Schuh Center","21":"MAERZ Muenchen Outlet","22":"Tretter Bartu Outlet"},"address":{"0":"Wolfratshauser Str. 189","1":"Georgenstr. 46","2":"Hohenzollernstr. 69","3":"F\u00fcrstenstr. 17","4":"Kurf\u00fcrstenstr. 49","5":"Theatinerstr. 15","6":"Kaufingerstr. 9","7":"Schlei\u00dfheimer Stra\u00dfe 506","8":"Hanauerstr. 68","9":"Thomas-Dehler-Stra\u00dfe 10","10":"Willy-Brandt-Platz 5","11":"Theatinerstr. 15","12":"Sendlinger Stra\u00dfe 10","13":"Kaufingerstr. 9","14":"Brienner Str. 11","15":"Karlsplatz Stachus 1. UG","16":"Blumenstra\u00dfe 4","17":"Nordallee 25","18":"Lochhamerstr. 4","19":"Leopoldstr. 20","20":"Heimstettener Str. 1","21":"Bayerwaldstr. 7","22":"Bayerstr. 8"},"votes":{"0":"5","1":"5","2":"5","3":"0","4":"5","5":"4","6":"5","7":"0","8":"4","9":"5","10":"4","11":"4","12":"4","13":"5","14":"4","15":"4","16":"3","17":"3","18":"5","19":"0","20":"0","21":"5","22":"0"},"link":{"0":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1259241\/","1":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/56539\/","2":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1262530\/","3":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1265505\/","4":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1219476\/","5":"https:\/\/www.muenchen.de\/shopping\/orte\/120559.html","6":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/40527\/","7":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1294992\/","8":"http:\/\/www.muenchen.de\/shopping\/orte\/120887.html","9":"http:\/\/www.muenchen.de\/shopping\/orte\/120886.html","10":"http:\/\/www.muenchen.de\/shopping\/orte\/120885.html","11":"https:\/\/www.muenchen.de\/shopping\/orte\/120559.html","12":"http:\/\/www.muenchen.de\/shopping\/orte\/273414.html","13":"http:\/\/www.muenchen.de\/shopping\/orte\/120718.html","14":"http:\/\/www.muenchen.de\/shopping\/orte\/120716.html","15":"http:\/\/www.muenchen.de\/shopping\/orte\/120717.html","16":"https:\/\/www.muenchen.de\/shopping\/orte\/1253241.html","17":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1267077\/","18":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1262050\/","19":"http:\/\/www.muenchen.de\/shopping\/orte\/120911.html","20":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1289405\/","21":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1259646\/","22":"https:\/\/branchenbuch.portal.muenchen.de\/mhp\/1289849\/"},"Zipcode":{"0":"81479","1":"80799","2":"80796","3":"80333","4":"80801","5":"80333","6":"80331","7":"80933","8":"80993","9":"81737","10":"81829","11":"80333","12":"80331","13":"80331","14":"80333","15":"80335","16":"80331","17":"85326","18":"82152","19":"80802","20":"85599","21":"81737","22":"80335"}}
+[
+  {
+    "id": 0,
+    "restaurant": "Designer Second Hand Solln",
+    "address": "Wolfratshauser Str. 189",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1259241/",
+    "Zipcode": 81479
+  },
+  {
+    "id": 1,
+    "restaurant": "Gabin Designer Secondhand",
+    "address": "Georgenstr. 46",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/56539/",
+    "Zipcode": 80799
+  },
+  {
+    "id": 2,
+    "restaurant": "Cri Cri Secondhand Kindermode",
+    "address": "Hohenzollernstr. 69",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1262530/",
+    "Zipcode": 80796
+  },
+  {
+    "id": 3,
+    "restaurant": "Fashion & Fantasy",
+    "address": "Fürstenstr. 17",
+    "votes": 0,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1265505/",
+    "Zipcode": 80333
+  },
+  {
+    "id": 4,
+    "restaurant": "KLEIDERPRACHT 1st & 2nd hand",
+    "address": "Kurfürstenstr. 49",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1219476/",
+    "Zipcode": 80801
+  },
+  {
+    "id": 5,
+    "restaurant": "CityQuartier Fünf Höfe",
+    "address": "Theatinerstr. 15",
+    "votes": 4,
+    "link": "https://www.muenchen.de/shopping/orte/120559.html",
+    "Zipcode": 80333
+  },
+  {
+    "id": 6,
+    "restaurant": "Kaufingertor",
+    "address": "Kaufingerstr. 9",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/40527/",
+    "Zipcode": 80331
+  },
+  {
+    "id": 7,
+    "restaurant": "MIRA mein Einkaufszentrum",
+    "address": "Schleißheimer Straße 506",
+    "votes": 0,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1294992/",
+    "Zipcode": 80933
+  },
+  {
+    "id": 8,
+    "restaurant": "Olympia-Einkaufszentrum",
+    "address": "Hanauerstr. 68",
+    "votes": 4,
+    "link": "http://www.muenchen.de/shopping/orte/120887.html",
+    "Zipcode": 80993
+  },
+  {
+    "id": 9,
+    "restaurant": "pep München-Neuperlach",
+    "address": "Thomas-Dehler-Straße 10",
+    "votes": 5,
+    "link": "http://www.muenchen.de/shopping/orte/120886.html",
+    "Zipcode": 81737
+  },
+  {
+    "id": 10,
+    "restaurant": "Riem Arcaden",
+    "address": "Willy-Brandt-Platz 5",
+    "votes": 4,
+    "link": "http://www.muenchen.de/shopping/orte/120885.html",
+    "Zipcode": 81829
+  },
+  {
+    "id": 11,
+    "restaurant": "CityQuartier Fünf Höfe",
+    "address": "Theatinerstr. 15",
+    "votes": 4,
+    "link": "https://www.muenchen.de/shopping/orte/120559.html",
+    "Zipcode": 80333
+  },
+  {
+    "id": 12,
+    "restaurant": "Hofstatt Einkaufspassage",
+    "address": "Sendlinger Straße 10",
+    "votes": 4,
+    "link": "http://www.muenchen.de/shopping/orte/273414.html",
+    "Zipcode": 80331
+  },
+  {
+    "id": 13,
+    "restaurant": "Kaufingertor",
+    "address": "Kaufingerstr. 9",
+    "votes": 5,
+    "link": "http://www.muenchen.de/shopping/orte/120718.html",
+    "Zipcode": 80331
+  },
+  {
+    "id": 14,
+    "restaurant": "Luitpoldblock",
+    "address": "Brienner Str. 11",
+    "votes": 4,
+    "link": "http://www.muenchen.de/shopping/orte/120716.html",
+    "Zipcode": 80333
+  },
+  {
+    "id": 15,
+    "restaurant": "Stachus Passagen",
+    "address": "Karlsplatz Stachus 1. UG",
+    "votes": 4,
+    "link": "http://www.muenchen.de/shopping/orte/120717.html",
+    "Zipcode": 80335
+  },
+  {
+    "id": 16,
+    "restaurant": "Eataly am Viktualienmarkt",
+    "address": "Blumenstraße 4",
+    "votes": 3,
+    "link": "https://www.muenchen.de/shopping/orte/1253241.html",
+    "Zipcode": 80331
+  },
+  {
+    "id": 17,
+    "restaurant": "Flughafen München",
+    "address": "Nordallee 25",
+    "votes": 3,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1267077/",
+    "Zipcode": 85326
+  },
+  {
+    "id": 18,
+    "restaurant": "BASSETTI OUTLET Martinsried",
+    "address": "Lochhamerstr. 4",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1262050/",
+    "Zipcode": 82152
+  },
+  {
+    "id": 19,
+    "restaurant": "Classic Outlet",
+    "address": "Leopoldstr. 20",
+    "votes": 0,
+    "link": "http://www.muenchen.de/shopping/orte/120911.html",
+    "Zipcode": 80802
+  },
+  {
+    "id": 20,
+    "restaurant": "Tretter Schuh Center",
+    "address": "Heimstettener Str. 1",
+    "votes": 0,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1289405/",
+    "Zipcode": 85599
+  },
+  {
+    "id": 21,
+    "restaurant": "MAERZ Muenchen Outlet",
+    "address": "Bayerwaldstr. 7",
+    "votes": 5,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1259646/",
+    "Zipcode": 81737
+  },
+  {
+    "id": 22,
+    "restaurant": "Tretter Bartu Outlet",
+    "address": "Bayerstr. 8",
+    "votes": 0,
+    "link": "https://branchenbuch.portal.muenchen.de/mhp/1289849/",
+    "Zipcode": 80335
+  }
+]

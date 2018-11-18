@@ -1,4 +1,4 @@
-#event-selection algorithm 
+#event-selection algorithm
 import numpy as np
 from numpy.random import choice
 ranges = [[1, 1],[2, 3],[3,5]] #[level, weight]
@@ -14,7 +14,7 @@ days = 4 #range 1-4
 level = 3 #range 1-3
 #-----------------finished----------------------#
 
-#act = [] #a list of all type of activities 
+#act = [] #a list of all type of activities
 
 num_act = total_agenda[days-1][level-1] #actual number of activities 
 choices = ['landmark', 'culture', 'shopping']
@@ -26,9 +26,9 @@ wc = culture/weight
 ws = shopping/weight
 w = [wl, wc, ws]
 print(weight)
-cl = 1 
+cl = 1
 cc = 1
-cs = 1 
+cs = 1
 
 while (cl > wl + 0.08) or (cc > wc + 0.08) or (cs > ws +0.08) :
 	act = list(choice(choices, num_act, w))
@@ -41,5 +41,3 @@ while (cl > wl + 0.08) or (cc > wc + 0.08) or (cs > ws +0.08) :
 ratio = [cl, cc, cs]
 print(ratio)
 print(act)
-
-

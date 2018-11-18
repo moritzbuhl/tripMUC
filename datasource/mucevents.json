@@ -1,1 +1,44 @@
-{"Events":{"0":"Literaturfest","1":"Ich lieb dich","2":"Food & Life","3":"Heim+Handwerk","4":"Christkindlmarkt auf dem Marienplatz","5":"Christkindlmarkt am Sendlinger Tor"},"link":{"0":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/6259.html","1":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/36440.html","2":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/17570.html","3":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/17571.html","4":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/15626.html","5":"https:\/\/www.muenchen.de\/veranstaltungen\/event\/15355.html"},"Location":{"0":"Diverse Orte in M\u00fcnchen","1":"Schauburg","2":"Messe M\u00fcnchen","3":"Messe M\u00fcnchen","4":"Marienplatz","5":"Sendlinger Tor"},"Time":{"0":"Do, 29.11.2018, 08:00 Uhr","1":"Do, 29.11.2018, 09:00 Uhr","2":"Do, 29.11.2018, 09:30 Uhr","3":"Do, 29.11.2018, 09:30 Uhr","4":"Do, 29.11.2018, 10:00 Uhr","5":"Do, 29.11.2018, 10:30 Uhr"}}
+[
+  {
+    "id": 0,
+    "Events": "Literaturfest",
+    "link": "https://www.muenchen.de/veranstaltungen/event/6259.html",
+    "Location": "Diverse Orte in München",
+    "Time": "Do, 29.11.2018, 08:00 Uhr"
+  },
+  {
+    "id": 1,
+    "Events": "Ich lieb dich",
+    "link": "https://www.muenchen.de/veranstaltungen/event/36440.html",
+    "Location": "Schauburg",
+    "Time": "Do, 29.11.2018, 09:00 Uhr"
+  },
+  {
+    "id": 2,
+    "Events": "Food & Life",
+    "link": "https://www.muenchen.de/veranstaltungen/event/17570.html",
+    "Location": "Messe München",
+    "Time": "Do, 29.11.2018, 09:30 Uhr"
+  },
+  {
+    "id": 3,
+    "Events": "Heim+Handwerk",
+    "link": "https://www.muenchen.de/veranstaltungen/event/17571.html",
+    "Location": "Messe München",
+    "Time": "Do, 29.11.2018, 09:30 Uhr"
+  },
+  {
+    "id": 4,
+    "Events": "Christkindlmarkt auf dem Marienplatz",
+    "link": "https://www.muenchen.de/veranstaltungen/event/15626.html",
+    "Location": "Marienplatz",
+    "Time": "Do, 29.11.2018, 10:00 Uhr"
+  },
+  {
+    "id": 5,
+    "Events": "Christkindlmarkt am Sendlinger Tor",
+    "link": "https://www.muenchen.de/veranstaltungen/event/15355.html",
+    "Location": "Sendlinger Tor",
+    "Time": "Do, 29.11.2018, 10:30 Uhr"
+  }
+]
