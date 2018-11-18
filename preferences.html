@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>tripMuc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Plan your trip through Munich">
+    <meta name="description" content="Plan your trip in Munich">
 
+    <link rel="stylesheet" type="text/css" href="node_modules/map-icons/dist/css/map-icons.css">
     <style>
     body {
       margin: 0;
@@ -90,9 +91,10 @@
     #preference-form p {
       margin-top: 10px;
     }
-    #preference-form span {
+    #preference-form tiny {
       margin-top: 10px;
       font-size: 12px;
+      color: rgba(255,255,255,0.8);
     }
     #preference-form > div {
       width: 300px;
@@ -116,7 +118,8 @@
       margin-top: 15px;
       height: 0;
     }
-    input[type=range]::-webkit-slider-thumb {
+    input[type=range]::-webkit-slider-thumb,
+    input[type=range]::-moz-range-thumb {
       -webkit-appearance: none;
       border: none;
       width: 12px;
@@ -136,9 +139,9 @@
       <div id="preference-form" class="vertical-center">
         <div>
           <span style="width: 180px;"></span>
-          <span>less</span>
-          <span>medium</span>
-          <span>more</span>
+          <tiny>less</tiny>
+          <tiny>avg.</tiny>
+          <tiny>more</tiny>
         </div>
         <div>
           <label for="trip-length">Daily activities</label>
@@ -146,24 +149,16 @@
         </div>
         <p>Interests in &#8230;</p>
         <div>
-          <label for="sightseeing-interest">Landmarks</label>
+          <label for="sightseeing-interest"><span class="map-icon map-icon-point-of-interest"></span> Landmarks</label>
           <input name="sightseeing-interest" type="range" min="-1" max="1" step="1">
         </div>
         <div>
-          <label for="culture-interest">Culture</label>
+          <label for="culture-interest"><span class="map-icon map-icon-museum"></span> Culture</label>
           <input name="culture-interest" type="range" min="-1" max="1" step="1">
         </div>
         <div>
-          <label for="shopping-interest">Shopping</label>
+          <label for="shopping-interest"><span class="map-icon map-icon-shopping-mall"></span> Shopping</label>
           <input name="shopping-interest" type="range" min="-1" max="1" step="1">
-        </div>
-        <div>
-          <label for="food-interest">Food</label>
-          <input name="food-interest" type="range" min="-1" max="1" step="1">
-        </div>
-        <div>
-          <label for="events-interest">Events</label>
-          <input name="events-interest" type="range" min="-1" max="1" step="1">
         </div>
         <div style="justify-content: center;">
           <input id="start" style="margin-top: 20px;" type="button" value="&#10132;">

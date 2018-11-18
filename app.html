@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>tripMuc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Plan your trip in Munich">
+
+  	<link rel="stylesheet" type="text/css" href="node_modules/map-icons/dist/css/map-icons.css">
+    <style>
+    body {
+      margin: 0;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background-color: #1b98d5;
+    }
+    .width-100 {
+      width: 100vw;
+    }
+    .height-100 {
+      height: 100vh;
+    }
+    .height-66 {
+      height: 66vh;
+    }
+    .vertical-center {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .horizontal-center {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+    h1 {
+      font-size: 52px;
+      padding: 0;
+      margin: 30px 0;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      font-weight: lighter;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    input, select {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      font-size: 24px;
+      font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      max-width: 196px;
+    }
+    #start, #next {
+      width: 48px;
+      height: 48px;
+      background-color: #ffe501;
+      border-radius: 50%;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 2px 2px rgba(0,0,0,0.1);
+      font-weight: bold;
+      margin-left: 10px;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    .input-wrap {
+      background-color: white;
+      margin: 0 10px;
+      padding: 2px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      font-family: sans-serif;
+      border: 4px solid white;
+      border-radius: 10px;
+    }
+    label, p, span {
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+    }
+    #preference-form p {
+      margin-top: 10px;
+    }
+    #preference-form tiny {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+    #preference-form > div {
+      width: 300px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    #preference-form label {
+        height: 30px;
+    }
+    #preference-form {
+      font-size: 20px;
+    }
+    input[type="range"] {
+      width: 110px;
+      border: 1px solid rgba(255,255,255,0.4);
+      -webkit-appearance: none;
+      appearance: none;
+      background: none;
+      outline: none;
+      margin-top: 15px;
+      height: 0;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 229, 1, 0.8);
+      cursor: pointer;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #time-table-container {
+      width: 32vw;
+      padding: 3vh 3vw;
+      justify-content: start;
+    }
+    #time-table {
+      width: 100%;
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #trip-map-container {
+        width: 44vw;
+        height: 60vh;
+        padding: 3vh 3vw;
+    }
+    #map {
+      height: 60vh;
+      width: 60vh;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #suggested-location-container {
+        width: 44vw;
+        height: 28vh;
+        padding: 3vh 3vw;
+    }
+    #suggestions {
+      height: 28vh;
+      width: 44vw;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 2px 2px rgba(0,0,0,0.2);
+    }
+    #time-table-header {
+      background-color: rgba(255,255,255,0.5);
+    }
+    .single-day {
+      width: 25%;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,0);
+      text-align: center;
+    }
+    .selected-day {
+      background-color: white;
+    }
+    h3 {
+      font-size: 20px;
+      margin: 0;
+      color: rgba(0,0,0,0.7);
+    }
+    .selected-day > h3 {
+    color: rgba(0,0,0,1);
+    }
+    h4 {
+      margin: 0;
+    }
+    h4 > a {
+      font-size: 12px;
+      color: #1b98d5;
+      text-decoration: none;
+    }
+    h4 > a > img {
+      height: 14px;
+      margin-bottom: -2px;
+    }
+    time {
+      color: rgba(0,0,0,0.5);
+      font-style: italic;
+      font-size: 12px;
+      margin: 0;
+    }
+    .location-item {
+      background-color: white;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      justify-content: space-between;
+    }
+    .item-info {
+      padding: 8px;
+      width: 100%;
+    }
+    small {
+      font-size: 12px;
+      color: rgba(0,0,0,0.8);
+    }
+    .travel-time {
+      background-color: white;
+      padding-left: 89px;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+    .travel-time > p,
+    .map-icon-bus-station {
+      color: rgba(0,0,0,0.7);
+      font-size: 14px;
+      margin-right: 24px;
+    }
+    .draggable {
+      padding: 0 20px;
+      border-right: 1px solid rgba(0,0,0,0.2);
+    }
+    .remove {
+      height: 16px;
+      margin: 4px;
+    }
+    .category-icon {
+      height: 48px;
+      width: 48px;
+    }
+    #view1, #view2, #view3 {
+      display: none;
+    }
+    #day1, #day2, #day3, #day4 {
+      visibility: hidden;
+    }
+    #location-list .map-icon-point-of-interest,
+    #location-list .map-icon-museum,
+    #location-list .map-icon-shopping-mall,
+    #location-list .map-icon-restaurant {
+      color: black;
+      line-height: 64px;
+      margin: 0 8px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   <script>
+   var mymap, startDate, days, schedule;
+   var level, landmark, culture, shopping;
+
+   function kk_algorithm() {
+     let num_act = level * days;
+     let weight = 0 + landmark + culture + shopping;
+     let wl = landmark/weight;
+     let wc = culture/weight;
+     let ws = shopping/weight;
+
+     let cl = 1, cc = 1, cs = 1;
+     let act;
+     let x = 0.666666668;
+     let fix = x / num_act;
+     while ((cl > wl + fix) || (cc > wc + fix) || (cs > ws + fix)) {
+       let count_l = 0, count_c = 0, count_s = 0;
+       act = [];
+       for (let i = 0; i < num_act; i++) {
+         let random = Math.random();
+         if (random < wl) {
+           count_l++;
+           act.push(1);
+         } else if (random < (wl + wc)) {
+           count_c++;
+           act.push(2);
+         } else {
+           count_s++;
+           act.push(3);
+         }
+       }
+       cl = count_l/num_act;
+       cc = count_c/num_act;
+       cs = count_s/num_act;
+     }
+     return act;
+   }
+   var food, events, museums, shoppings, sightseeing;
+   saveJSON("datasource/mucessen.json", "food");
+   saveJSON("datasource/mucevents.json", "events");
+   saveJSON("datasource/mucmuseen.json", "museums");
+   saveJSON("datasource/mucshopping.json", "shoppings");
+   saveJSON("datasource/mucsights.json", "sightseeing");
+
+   function saveJSON(url,globVar) {
+     let xhr = new XMLHttpRequest();
+     xhr.open('GET', url, true);
+     xhr.onload = function() {
+       if (xhr.status >= 200 && xhr.status < 400) {
+         window[globVar] = JSON.parse(xhr.responseText).sort((a,b) => {
+           return a.votes - b.votes;
+         });
+       }
+      }
+      xhr.send();
+    }
+    var timetable = [];
+    var itemtable = [];
+    var icons = [
+      '<span class="map-icon map-icon-point-of-interest"></span>',
+      '<span class="map-icon map-icon-museum"></span>',
+      '<span class="map-icon map-icon-shopping-mall"></span>',
+      '<span class="map-icon map-icon-restaurant"></span>'
+    ];
+    var lunchChoises = [], dinnerChoises = [];
+    function filltables() {
+      let nameIdx = ['restaurant', 'Museum', 'restaurant', 'restaurant']; // XXX refactor
+      let whats = [window.sightseeing, window.museums, window.shoppings, window.food];
+      let locList = document.getElementById('location-list');
+      for (let i = 0; i < days; i++) {
+        timetable[i] = [];
+        itemtable[i] = [];
+      }
+      schedule.forEach((what, i) => {
+        let info = whats[what-1].pop();
+        info.what = what-1;
+        timetable[Math.floor(i/level)].push(info);
+      });
+      timetable.forEach((day, i) => {
+        beforeZip = day[Math.floor(day.length/2)-1].Zipcode;
+        afterZip = day[Math.floor(day.length/2)].Zipcode;
+        lunchChoises[i] = [];
+        food.forEach(restaurant => {
+          if (restaurant.Zipcode == beforeZip || restaurant.Zipcode == afterZip) {
+            restaurant.what = 3;
+            lunchChoises[i].push(restaurant);
+          }
+        });
+        lunchChoises[i].sort((a,b) => { return a.votes - b.votes; });
+        timetable[i].splice(day.length/2, 0, lunchChoises[i].pop());
+        dinnerChoises[i] = [];
+        let dinnerZip = timetable[i][timetable[i].length-1].Zipcode;
+        food.forEach(restaurant => {
+          if (restaurant.Zipcode == dinnerZip){
+            restaurant.what = 3;
+            dinnerChoises[i].push(restaurant);
+          }
+        });
+        dinnerChoises[i].sort((a,b) => { return b.votes - a.votes; });
+        timetable[i].push(dinnerChoises[i].pop());
+      });
+      timetable.forEach((day, i) => {
+        day.forEach(info => {
+          let itemstr = `
+<div class="vertical-center">
+  <div class="location-item horizontal-center">
+    <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+    ${icons[info.what]}
+    <div class="item-info">
+      <h4>${info[nameIdx[info.what]]}<a href="${info.link}"> more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+      <small>${info.address}, ${info.Zipcode} Munich</small>
+    </div>
+    <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+  </div>
+  <div class="travel-time">
+    <p><span class="map-icon map-icon-bus-station"></span> ~25 Minutes travel time</p>
+  </div>
+</div>`;
+          itemtable[i].push(itemstr);
+        });
+      });
+    }
+   window.onload = () => {
+     mymap = L.map('map').setView([48.135000, 11.575000], 13);
+     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
+       maxZoom: 18,
+       id: 'mapbox.streets',
+       accessToken: 'pk.eyJ1IjoibWJ1aGwiLCJhIjoiY2pvbHc0cWtiMGQ1MDNrcWIycXljbDlnaiJ9.CMZXaqKpsWdVQKZ91aGXHg'
+     }).addTo(mymap);
+     document.getElementById('view1').style.display = 'initial';
+     document.getElementById('start').onclick = () => {
+       startDate = new Date(document.getElementById('date-picker').value);
+       days = parseInt(document.getElementById('span-selector').value);
+       for (let i = 1; i <= days; i++) {
+         document.getElementById('day' + i).style.visibility = 'initial';
+       }
+       document.getElementById('view1').style.display = null;
+       document.getElementById('view2').style.display = 'initial';
+     };
+     document.getElementById('next').onclick = () => {
+       level = parseInt(document.getElementById('trip-length').value);
+       landmark = parseInt(document.getElementById('sightseeing-interest').value);
+       culture = parseInt(document.getElementById('culture-interest').value);
+       shopping = parseInt(document.getElementById('shopping-interest').value);
+       schedule = kk_algorithm();
+       filltables();
+       document.getElementById('location-list').innerHTML = itemtable[0].join('');
+       document.getElementById('view2').style.display = null;
+       document.getElementById('view3').style.display = 'flex';
+     };
+     document.getElementById('day1').onclick = () => {
+       document.getElementById('location-list').innerHTML = itemtable[0].join('');
+       document.getElementsByClassName('selected-day')[0].classList='single-day';
+       document.getElementById('day1').classList = "single-day selected-day";
+     };
+     document.getElementById('day2').onclick = () => {
+       document.getElementById('location-list').innerHTML = itemtable[1].join('');
+       document.getElementsByClassName('selected-day')[0].classList='single-day';
+       document.getElementById('day2').classList = "single-day selected-day";
+     };
+     document.getElementById('day3').onclick = () => {
+       document.getElementById('location-list').innerHTML = itemtable[2].join('');
+       document.getElementsByClassName('selected-day')[0].classList='single-day';
+       document.getElementById('day3').classList = "single-day selected-day";
+     };
+     document.getElementById('day4').onclick = () => {
+       document.getElementById('location-list').innerHTML = itemtable[3].join('');
+       document.getElementsByClassName('selected-day')[0].classList='single-day';
+       document.getElementById('day4').classList = "single-day selected-day";
+     };
+
+   };
+   </script>
+  </head>
+  <body>
+    <noscript>Please enable JavaScript to view this website.</noscript>
+    <div id="view1" class="height-66 width-100 vertical-center">
+      <h1>Start your trip in Munich</h1>
+      <h2>1. Select when and how long you are staying in Munich</h2>
+      <div class="horizontal-center">
+        <div class="input-wrap">
+          <input id="date-picker" type="date" value="2018-11-18">
+        </div>
+        <div class="input-wrap">
+          <select id="span-selector">
+            <option value="1">1 Day </option>
+            <option selected value="2">2 Days</option>
+            <option value="3">3 Days</option>
+            <option value="4">4 Days</option>
+          </select>
+        </div>
+        <input id="start" type="button" value="&#10132;">
+      </div>
+    </div>
+    <div id="view2" class="height-100 width-100 vertical-center">
+      <h2>2. Select your preferences</h2>
+      <div class="horizontal-center">
+        <div id="preference-form" class="vertical-center">
+          <div>
+            <span style="width: 180px;"></span>
+            <tiny>less</tiny>
+            <tiny>avg.</tiny>
+            <tiny>more</tiny>
+          </div>
+          <div>
+            <label for="trip-length">Daily activities</label>
+            <input id="trip-length" type="range" min="2" max="4" step="1">
+          </div>
+          <p>Interests in &#8230;</p>
+          <div>
+            <label for="sightseeing-interest"><span class="map-icon map-icon-point-of-interest"></span> Landmarks</label>
+            <input id="sightseeing-interest" type="range" min="1" max="5" step=2>
+          </div>
+          <div>
+            <label for="culture-interest"><span class="map-icon map-icon-museum"></span> Culture</label>
+            <input id="culture-interest" type="range" min="1" max="5" step="2">
+          </div>
+          <div>
+            <label for="shopping-interest"><span class="map-icon map-icon-shopping-mall"></span> Shopping</label>
+            <input id="shopping-interest" type="range" min="1" max="5" step="2">
+          </div>
+          <div style="justify-content: center;">
+            <input id="next" style="margin-top: 20px;" type="button" value="&#10132;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="view3" class="horizontal-center">
+      <div id="time-table-container" class="vertical-center">
+        <div id="time-table">
+          <div id="time-table-header" class="horizontal-center">
+            <div id="day1" class="single-day selected-day">
+              <h3>Day 1</h3>
+              <time>18.11.2018</time>
+            </div>
+            <div id="day2" class="single-day">
+              <h3>Day 2</h3>
+              <time>19.11.2018</time>
+            </div>
+            <div id="day3" class="single-day">
+              <h3>Day 3</h3>
+              <time>20.11.2018</time>
+            </div>
+            <div id="day4" class="single-day">
+              <h3>Day 4</h3>
+              <time>21.11.2018</time>
+            </div>
+          </div>
+          <div id="location-list">
+            <div class="vertical-center">
+              <div class="location-item horizontal-center">
+                <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                <div class="item-info">
+                  <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                  <small>Location-Str. 4, 80000 Munich</small>
+                </div>
+                <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+              </div>
+              <div class="travel-time">
+                <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+              </div>
+            </div>
+              <div class="vertical-center">
+                <div class="location-item horizontal-center">
+                  <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                  <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                  <div class="item-info">
+                    <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                    <small>Location-Str. 4, 80000 Munich</small>
+                  </div>
+                  <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                </div>
+                <div class="travel-time">
+                  <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                </div>
+              </div>
+                <div class="vertical-center">
+                  <div class="location-item horizontal-center">
+                    <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                    <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                    <div class="item-info">
+                      <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                      <small>Location-Str. 4, 80000 Munich</small>
+                    </div>
+                    <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                  </div>
+                  <div class="travel-time">
+                    <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                  </div>
+                </div>
+                  <div class="vertical-center">
+                    <div class="location-item horizontal-center">
+                      <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                      <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                      <div class="item-info">
+                        <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                        <small>Location-Str. 4, 80000 Munich</small>
+                      </div>
+                      <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                    </div>
+                    <div class="travel-time">
+                      <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                    </div>
+                  </div>
+                    <div class="vertical-center">
+                      <div class="location-item horizontal-center">
+                        <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                        <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                        <div class="item-info">
+                          <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                          <small>Location-Str. 4, 80000 Munich</small>
+                        </div>
+                        <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                      </div>
+                      <div class="travel-time">
+                        <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                      </div>
+                    </div>
+                      <div class="vertical-center">
+                        <div class="location-item horizontal-center">
+                          <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
+                          <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
+                          <div class="item-info">
+                            <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
+                            <small>Location-Str. 4, 80000 Munich</small>
+                          </div>
+                          <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
+                        </div>
+                        <div class="travel-time">
+                          <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
+                        </div>
+                      </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div id="trip-map-container">
+          <div id="map">
+          </div>
+        </div>
+        <div id="suggested-location-container">
+          <div id="suggestions">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

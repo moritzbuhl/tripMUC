@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ,Museum,address,votes,link,Zipcode
+=======
+id,Museum,address,votes,link,Zipcode
+>>>>>>> f34965ff10984204a49484d32e08be4ddb561cee
 0,Alte Pinakothek,Barer Str. 27,4,https://www.muenchen.de/sehenswuerdigkeiten/orte/119226.html,80799
 1,Artothek & Bildersaal,Rosental 16,4,https://www.muenchen.de/sehenswuerdigkeiten/orte/130856.html,80331
 2,Bauernhof- und Wintersportmuseum Schliersee,Brunnbichl 5,5,https://www.muenchen.de/sehenswuerdigkeiten/orte/120216.html,83727

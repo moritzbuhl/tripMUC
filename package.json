@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Plan your trip to Munich with tripMUC",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "map-icons": "^3.0.3"
+  },
   "devDependencies": {
     "http-server": "^0.11.1"
   },
