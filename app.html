@@ -291,26 +291,40 @@
      return act;
    }
    var food, events, museums, shoppings, sightseeing;
-   saveJSON("datasource/mucessen.json", "food");
-   saveJSON("datasource/mucevents.json", "events");
-   saveJSON("datasource/mucmuseen.json", "museums");
-   saveJSON("datasource/mucshopping.json", "shoppings");
-   saveJSON("datasource/mucsights.json", "sightseeing");
+   saveJSON("datasource/mucessen.json", "food", true);
+   saveJSON("datasource/mucevents.json", "events", true);
+   saveJSON("datasource/mucmuseen.json", "museums", true);
+   saveJSON("datasource/mucshopping.json", "shoppings", true);
+   saveJSON("datasource/mucsights.json", "sightseeing", true);
 
-   function saveJSON(url,globVar) {
+   function saveJSON(url,globVar, voteSort) {
      let xhr = new XMLHttpRequest();
      xhr.open('GET', url, true);
      xhr.onload = function() {
        if (xhr.status >= 200 && xhr.status < 400) {
-         window[globVar] = JSON.parse(xhr.responseText).sort((a,b) => {
-           return a.votes - b.votes;
-         });
+         window[globVar] = JSON.parse(xhr.responseText);
+         if (voteSort)
+           window[globVar].sort((a,b) => { return
+             if (a.votes == b.votes) { return (Math.random()-0.5)}
+             else {a.votes - b.votes; } });
        }
       }
       xhr.send();
     }
+    function getJSON(url,cb) {
+      let xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 400) {
+          cb(xhr.responseText);
+       }
+     }
+     xhr.send();
+   }
     var timetable = [];
     var itemtable = [];
+    var locations = [];
+    var markers = [];
     var icons = [
       '<span class="map-icon map-icon-point-of-interest"></span>',
       '<span class="map-icon map-icon-museum"></span>',
@@ -325,6 +339,8 @@
       for (let i = 0; i < days; i++) {
         timetable[i] = [];
         itemtable[i] = [];
+        locations[i] = [];
+        markers[i] = [];
       }
       schedule.forEach((what, i) => {
         let info = whats[what-1].pop();
@@ -352,6 +368,11 @@
           }
         });
         dinnerChoises[i].sort((a,b) => { return b.votes - a.votes; });
+        if (dinnerChoises[i].length == 0) {
+          console.log('no restaurant at location, choosing random.')
+          dinnerChoises[i][1] = food[22];
+          dinnerChoises[i][1].what = 3;
+        }
         timetable[i].push(dinnerChoises[i].pop());
       });
       timetable.forEach((day, i) => {
@@ -372,6 +393,18 @@
   </div>
 </div>`;
           itemtable[i].push(itemstr);
+        });
+      });
+    }
+    function fillmap() {
+      timetable.forEach((day, i) => {
+        day.forEach((info,j) => {
+          let query = `https://nominatim.openstreetmap.org/search?street=${info.address}&postalcode=${info.Zipcode}&format=json`;
+          getJSON(query, resp => {
+            let r = JSON.parse(resp);
+            locations[i][j] = [r[0].lat, r[0].lon];
+            markers[i][j] = L.marker(locations[i][j]);
+          });
         });
       });
     }
@@ -400,28 +433,78 @@
        shopping = parseInt(document.getElementById('shopping-interest').value);
        schedule = kk_algorithm();
        filltables();
+       fillmap();
        document.getElementById('location-list').innerHTML = itemtable[0].join('');
        document.getElementById('view2').style.display = null;
        document.getElementById('view3').style.display = 'flex';
+       setTimeout(() => {
+         document.getElementById('day1').click();
+       }, 2500); // XXX hack async
      };
      document.getElementById('day1').onclick = () => {
        document.getElementById('location-list').innerHTML = itemtable[0].join('');
-       document.getElementsByClassName('selected-day')[0].classList='single-day';
+
+       let prev = document.getElementsByClassName('selected-day')[0];
+        let m = parseInt(prev.id.replace('day',''));
+
+               markers[m-1].forEach(marker => {
+         mymap.removeLayer(marker);
+       });
+       prev.classList='single-day';
+
+       markers[0].forEach((marker,j) => {
+         marker.addTo(mymap);
+       })
        document.getElementById('day1').classList = "single-day selected-day";
      };
      document.getElementById('day2').onclick = () => {
        document.getElementById('location-list').innerHTML = itemtable[1].join('');
-       document.getElementsByClassName('selected-day')[0].classList='single-day';
+
+       let prev = document.getElementsByClassName('selected-day')[0];
+        let m = parseInt(prev.id.replace('day',''));
+
+               markers[m-1].forEach(marker => {
+         mymap.removeLayer(marker);
+       });
+       prev.classList='single-day';
+
+       markers[1].forEach((marker,j) => {
+         marker.addTo(mymap);
+       })
        document.getElementById('day2').classList = "single-day selected-day";
      };
      document.getElementById('day3').onclick = () => {
        document.getElementById('location-list').innerHTML = itemtable[2].join('');
        document.getElementsByClassName('selected-day')[0].classList='single-day';
+
+       let prev = document.getElementsByClassName('selected-day')[0];
+        let m = parseInt(prev.id.replace('day',''));
+
+               markers[m-1].forEach(marker => {
+         mymap.removeLayer(marker);
+       });
+       prev.classList='single-day';
+
+       markers[2].forEach((marker,j) => {
+         marker.addTo(mymap);
+       })
        document.getElementById('day3').classList = "single-day selected-day";
      };
      document.getElementById('day4').onclick = () => {
        document.getElementById('location-list').innerHTML = itemtable[3].join('');
        document.getElementsByClassName('selected-day')[0].classList='single-day';
+
+       let prev = document.getElementsByClassName('selected-day')[0];
+        let m = parseInt(prev.id.replace('day',''));
+
+               markers[m-1].forEach(marker => {
+         mymap.removeLayer(marker);
+       });
+       prev.classList='single-day';
+
+       markers[3].forEach((marker,j) => {
+         marker.addTo(mymap);
+       })
        document.getElementById('day4').classList = "single-day selected-day";
      };
 
@@ -503,90 +586,6 @@
             </div>
           </div>
           <div id="location-list">
-            <div class="vertical-center">
-              <div class="location-item horizontal-center">
-                <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                <div class="item-info">
-                  <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                  <small>Location-Str. 4, 80000 Munich</small>
-                </div>
-                <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-              </div>
-              <div class="travel-time">
-                <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-              </div>
-            </div>
-              <div class="vertical-center">
-                <div class="location-item horizontal-center">
-                  <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                  <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                  <div class="item-info">
-                    <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                    <small>Location-Str. 4, 80000 Munich</small>
-                  </div>
-                  <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-                </div>
-                <div class="travel-time">
-                  <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-                </div>
-              </div>
-                <div class="vertical-center">
-                  <div class="location-item horizontal-center">
-                    <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                    <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                    <div class="item-info">
-                      <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                      <small>Location-Str. 4, 80000 Munich</small>
-                    </div>
-                    <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-                  </div>
-                  <div class="travel-time">
-                    <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-                  </div>
-                </div>
-                  <div class="vertical-center">
-                    <div class="location-item horizontal-center">
-                      <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                      <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                      <div class="item-info">
-                        <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                        <small>Location-Str. 4, 80000 Munich</small>
-                      </div>
-                      <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-                    </div>
-                    <div class="travel-time">
-                      <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-                    </div>
-                  </div>
-                    <div class="vertical-center">
-                      <div class="location-item horizontal-center">
-                        <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                        <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                        <div class="item-info">
-                          <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                          <small>Location-Str. 4, 80000 Munich</small>
-                        </div>
-                        <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-                      </div>
-                      <div class="travel-time">
-                        <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-                      </div>
-                    </div>
-                      <div class="vertical-center">
-                        <div class="location-item horizontal-center">
-                          <img class="draggable" src="images/icons/baseline-drag_handle-24px.svg"></img>
-                          <img class="category-item" src="images/icons/baseline-local_dining-24px.svg"></img>
-                          <div class="item-info">
-                            <h4>Name <a href="xxx">more info <img src="images/icons/baseline-open_in_new-24px.svg"><img></a></h4>
-                            <small>Location-Str. 4, 80000 Munich</small>
-                          </div>
-                          <img class="remove" src="images/icons/baseline-close-24px.svg"></img>
-                        </div>
-                        <div class="travel-time">
-                          <p><span class="map-icon map-icon-bus-station"></span> ~30 Minutes travel time</p>
-                        </div>
-                      </div>
           </div>
         </div>
       </div>
@@ -595,7 +594,7 @@
           <div id="map">
           </div>
         </div>
-        <div id="suggested-location-container">
+        <div style="display:none;" id="suggested-location-container">
           <div id="suggestions">
           </div>
         </div>
